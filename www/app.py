@@ -1,7 +1,7 @@
 #！/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-__author__ = 'xiaott-ahh'
+__author__ = 'QiuJun tao'
 
 '''
 async web application.
