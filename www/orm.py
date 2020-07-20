@@ -20,8 +20,8 @@ async def create_pool(loop, **kw):
         port=kw.get('port', 3306),
         user=kw['user'],
         password=kw['password'],
-        db=kw['db'],
-        charset=kw.get('charset', 'utf-8'),
+        db=kw['database'],
+        charset=kw.get('charset', 'utf8'),
         autocommit=kw.get('autocommit', True),
         maxsize=kw.get('maxsize', 10),
         minsize=kw.get('minsize', 1),
@@ -121,6 +121,9 @@ class ModelMetaclass(type):
         fields = []
         primaryKey = None
         for k, v in attrs.items():
+            print(k,v)
+
+        for k, v in attrs.items():
             if isinstance(v, Field):
                 logging.info('found mapping:%s ==> %s' % (k, v))
                 mappings[k] = v
@@ -187,7 +190,7 @@ class Model(dict, metaclass=ModelMetaclass):
         orderBy = kw.get('orderBy', None)
         if orderBy:
             sql.append('order by')
-            sql.append('orderBy')
+            sql.append(orderBy)
         limit = kw.get('limit', None)
         if limit:
             sql.append('limit')
