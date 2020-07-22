@@ -120,8 +120,6 @@ class ModelMetaclass(type):
         mappings = dict()
         fields = []
         primaryKey = None
-        for k, v in attrs.items():
-            print(k,v)
 
         for k, v in attrs.items():
             if isinstance(v, Field):

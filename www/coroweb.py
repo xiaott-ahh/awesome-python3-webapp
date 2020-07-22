@@ -8,6 +8,7 @@ import functools
 import inspect
 import logging
 import os
+from apis import APIError
 from urllib import parse
 
 from aiohttp import web
@@ -181,6 +182,7 @@ def add_route(app, fn):
 
 
 def add_routes(app, module_name):
+
     n = module_name.rfind('.')
     if n == -1:
         mod = __import__(module_name, globals(), locals())
