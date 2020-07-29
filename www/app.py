@@ -8,7 +8,7 @@ async web application.
 '''
 
 import logging
-#import orm
+import orm
 
 logging.basicConfig(level=logging.INFO)
 
@@ -40,7 +40,7 @@ def init_jinja2(app, **kw):
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
     logging.info('set jinja2 template path:%s' % path)
     env = Environment(loader=FileSystemLoader(path), **options)
-    filters = kw.get('filter', None)
+    filters = kw.get('filters', None)
     if filters is not None:
         for name, f in filters.items():
             env.filters[name] = f
@@ -130,11 +130,10 @@ def datetime_filter(t):
 
 
 async def init(loop):
-    #await orm.create_pool(loop=loop, **configs.database)
+    await orm.create_pool(loop=loop, **configs.database)
 
-    #app = web.Application(middlewares=[logger_factory, response_factory])
-    app = web.Application()
-    #init_jinja2(app, filters=dict(datetime=datetime_filter))
+    app = web.Application(middlewares=[logger_factory, response_factory])
+    init_jinja2(app, filters=dict(datetime=datetime_filter))
     add_routes(app, 'handlers')
     add_static(app)
     
