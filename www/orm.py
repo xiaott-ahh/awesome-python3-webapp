@@ -116,14 +116,14 @@ class ModelMetaclass(type):
         if name == 'Model':
             return type.__new__(cls, name, bases, attrs)
         tableName = attrs.get('__table__', None) or name
-        logging.info('found model:%s (table:%s)' % (name, tableName))
+        #logging.info('found model:%s (table:%s)' % (name, tableName))
         mappings = dict()
         fields = []
         primaryKey = None
 
         for k, v in attrs.items():
             if isinstance(v, Field):
-                logging.info('found mapping:%s ==> %s' % (k, v))
+                #logging.info('found mapping:%s ==> %s' % (k, v))
                 mappings[k] = v
                 if v.primary_key:
                     if primaryKey:
